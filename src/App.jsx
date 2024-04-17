@@ -1,4 +1,3 @@
-import "./App.css";
 import Bookstore from "./features/bookstore/Bookstore";
 
 function App() {

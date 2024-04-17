@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editBook, addBook } from "./bookstoreSlice";
 
-const Modal = ({ addEditBook, setHideModal, modalType }) => {
+export const MODAL_MODES = {
+  ADD: "add",
+  EDIT: "edit",
+};
+
+const Modal = ({ addEditBook, setHideModal, modalType, modalBookIndex }) => {
+  console.log(modalBookIndex);
   const dispatch = useDispatch();
 
   //create state to store new book object
@@ -20,9 +26,10 @@ const Modal = ({ addEditBook, setHideModal, modalType }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setHideModal(true);
-    if (modalType === "edit") {
-      dispatch(editBook(newBook));
-    } else if (modalType === "add") {
+    if (modalType === MODAL_MODES.EDIT) {
+      const payload = { newBook, modalBookIndex };
+      dispatch(editBook(payload));
+    } else if (modalType === MODAL_MODES.ADD) {
       dispatch(addBook(newBook));
     }
   };
@@ -92,7 +99,7 @@ const Modal = ({ addEditBook, setHideModal, modalType }) => {
             ></textarea>
           </div>
           <div className="button-container">
-            <button className="submitPopUp">Submit</button>
+            <button className="submit">Submit</button>
             <button
               onClick={() => {
                 setHideModal(true);

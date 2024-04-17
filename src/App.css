@@ -1,14 +1,22 @@
-#root {
-  width: 100%;
-  height: 100vh;
-}
-
 body {
   padding: 0px;
   margin: 0px;
   position: relative;
+  background-color: #000329;
+  color: #f4efeb;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
+p {
+  margin: 0px;
+}
+
+header {
+  width: 100%;
+  padding: 10px 0px;
+  background-color: #ee7d21;
+  text-align: center;
+}
 .wrapper {
   max-width: 1400px;
   margin: 0 auto;
@@ -27,33 +35,65 @@ body {
 
 .book-container {
   list-style-type: none;
-  border: 2px solid grey;
+  border: 2px solid rgb(230, 163, 39);
   padding: 20px;
   margin: 5px 10px;
   width: 200px;
   border-radius: 15px;
-  background-color: rgb(237, 244, 250);
+  background-color: rgba(6, 10, 135, 0.608);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+  box-shadow: 0 4px #2a2d4a;
+  box-shadow: 0 0 rgb(174, 94, 28);
+  transition: background-color 0.27s ease-in-out, box-shadow 0.27s ease-in-out;
 }
 
-.book-container:hover,
-.addButton:hover {
-  border: 2px solid blue;
+.book-container:hover {
+  background-color: rgba(6, 72, 205, 0.73);
+  box-shadow: 0 0 rgb(174, 94, 28);
+  cursor: pointer;
 }
 
-header {
+.book-container h4 {
   width: 100%;
-  padding-top: 25px;
+  margin: 0px;
+  margin-top: 10px;
+  font-size: 20px;
+  font-style: normal;
 }
 
-.addButton {
-  display: block;
-  margin: 0 auto;
+.details {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-style: italic;
 }
 
 button {
   padding: 10px 20px;
   font-weight: bold;
-  border: 2px solid grey;
+  background-color: #f27c1a;
+  border-radius: 15px;
+  border: none;
+  color: #e7e1dd;
+}
+.addButton {
+  display: block;
+  margin: 25px auto;
+}
+
+button:hover {
+  background-color: #950000;
+  cursor: pointer;
+}
+
+.addButton:hover,
+.submit:hover {
+  background-color: #00954d;
+  cursor: pointer;
 }
 
 h3 {
@@ -80,8 +120,8 @@ h2 {
 }
 
 .modal-container {
-  background-color: rgb(237, 244, 250);
-  border: 2px solid gray;
+  background-color: rgba(0, 7, 78, 0.857);
+  border: 2px solid rgb(230, 163, 39);
   border-radius: 15px;
   max-width: 400px;
   margin: 0 auto;
@@ -104,6 +144,9 @@ h2 {
 .input-container input,
 .input-container textarea {
   width: 60%;
+  border: none;
+  margin: 3px 0px;
+  background-color: #fde9cf;
 }
 
 .button-container {

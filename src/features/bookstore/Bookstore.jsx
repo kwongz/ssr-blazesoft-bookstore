@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteBook } from "./bookstoreSlice";
-import Modal from "./Modal";
+import Modal, { MODAL_MODES } from "./Modal";
 
 function Bookstore() {
   const bookData = useSelector((state) => state.bookstore.value);
@@ -9,69 +9,77 @@ function Bookstore() {
   const [hideModal, setHideModal] = useState(true);
   const [addEditBook, setAddEditBook] = useState({});
   const [modalType, setModalType] = useState("");
+  const [modalBookIndex, setModalBookIndex] = useState("");
 
   const emptyBook = {
-    id: "",
     name: "",
     price: "",
     category: "",
     description: "",
   };
 
-  const handleShowModal = (clickedBook, addOrEdit) => {
+  const handleShowModal = (clickedBook, addOrEdit, index) => {
     setHideModal(!hideModal);
     setAddEditBook(clickedBook);
     setModalType(addOrEdit);
+    if (index) {
+      setModalBookIndex(index);
+    }
   };
 
-  const handleDelete = (e, book) => {
+  const handleDelete = (e, index) => {
     e.stopPropagation();
-    dispatch(deleteBook(book));
+    dispatch(deleteBook(index));
   };
 
   return (
-    <div className="wrapper">
+    <>
       <header>
+        <h1>Blazesoft BookStore</h1>
+      </header>
+      <div className="wrapper">
         <button
           className="addButton"
           aria-label="add book"
-          onClick={() => handleShowModal(emptyBook, "add")}
+          onClick={() => handleShowModal(emptyBook, MODAL_MODES.ADD)}
         >
           Add Book
         </button>
-      </header>
-      <h3>Balzesoft BookStore</h3>
-      <ul className="bookData-container">
-        {bookData.map((book) => (
-          <li
-            className="book-container"
-            key={book.id}
-            onClick={() => handleShowModal(book, "edit")}
-          >
-            <p>{book.name}</p>
-            <p>${book.price}</p>
-            <p>{book.category}</p>
-            <button
-              aria-label="delete book"
-              onClick={(e) => {
-                handleDelete(e, book);
-              }}
+        <ul className="bookData-container">
+          {bookData.map((book, index) => (
+            <li
+              className="book-container"
+              key={index}
+              onClick={() => handleShowModal(book, MODAL_MODES.EDIT, index)}
             >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
-      {hideModal ? (
-        ""
-      ) : (
-        <Modal
-          addEditBook={addEditBook}
-          setHideModal={setHideModal}
-          modalType={modalType}
-        />
-      )}
-    </div>
+              <div className="details">
+                <p>{book.category}</p>
+                <p>${book.price}</p>
+                <h4>{book.name}</h4>
+              </div>
+              <button
+                aria-label="delete book"
+                onClick={(e) => {
+                  handleDelete(e, index);
+                }}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+        {hideModal ? (
+          ""
+        ) : (
+          <Modal
+            addEditBook={addEditBook}
+            setHideModal={setHideModal}
+            modalType={modalType}
+            modalBookIndex={modalBookIndex}
+          />
+        )}
+      </div>
+    </>
   );
 }
 

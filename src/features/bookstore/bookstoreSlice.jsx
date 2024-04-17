@@ -1,34 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { generateUniqueId } from "./idGenerator";
 
 const booksData = [
   {
-    id: generateUniqueId(),
-    name: "Book 1",
-    price: 10,
+    name: "The Hitchhiker's Guide to the Galaxy",
+    price: 12.99,
     category: "Sci-fi",
-    description: "lorem ipsum...",
+    description: "A comedic science fiction series by Douglas Adams.",
   },
   {
-    id: generateUniqueId(),
-    name: "Book 2",
-    price: 15,
+    name: "Pride and Prejudice",
+    price: 9.99,
     category: "Romance",
-    description: "Lorem ipsum...",
+    description: "A classic romantic novel by Jane Austen.",
   },
   {
-    id: generateUniqueId(),
-    name: "Book 3",
-    price: 20,
+    name: "Sapiens: A Brief History of Humankind",
+    price: 17.5,
     category: "History",
-    description: "Lorem ipsum...",
+    description: "A popular science book by Yuval Noah Harari.",
   },
   {
-    id: generateUniqueId(),
-    name: "Book 4",
-    price: 5,
+    name: "The Joy of Cooking",
+    price: 24.95,
     category: "Cooking",
-    description: "Lorem ipsum...",
+    description: "A classic cookbook by Irma S. Rombauer.",
   },
 ];
 
@@ -39,16 +34,19 @@ export const bookstoreSlice = createSlice({
   },
   reducers: {
     deleteBook: (state, action) => {
-      const bookToDelete = action.payload;
+      const bookToDeleteIndex = action.payload;
+      console.log(bookToDeleteIndex);
       return {
         ...state,
-        value: state.value.filter((book) => book.id !== bookToDelete.id),
+        value: state.value.filter((book, index) => index !== bookToDeleteIndex),
       };
     },
     editBook: (state, action) => {
-      const editedBook = action.payload;
-      const newValue = state.value.map((book) =>
-        book.id === editedBook.id ? editedBook : book
+      const editedBook = action.payload.newBook;
+      const bookIndex = action.payload.modalBookIndex;
+      console.log(bookIndex);
+      const newValue = state.value.map((book, index) =>
+        index === bookIndex ? editedBook : book
       );
       return {
         ...state,
@@ -56,7 +54,7 @@ export const bookstoreSlice = createSlice({
       };
     },
     addBook: (state, action) => {
-      const addedBook = { ...action.payload, id: generateUniqueId() };
+      const addedBook = action.payload;
       const newValue = [...state.value];
 
       return {
