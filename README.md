@@ -1,1 +1,0 @@
-# ssr-blazesoft-bookstore
