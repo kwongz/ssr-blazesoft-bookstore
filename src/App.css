@@ -45,14 +45,11 @@ header {
   flex-direction: column;
   justify-content: space-between;
   height: 200px;
-  box-shadow: 0 4px #2a2d4a;
-  box-shadow: 0 0 rgb(174, 94, 28);
-  transition: background-color 0.27s ease-in-out, box-shadow 0.27s ease-in-out;
+  transition: background-color 0.27s ease-in-out;
 }
 
 .book-container:hover {
   background-color: rgba(6, 72, 205, 0.73);
-  box-shadow: 0 0 rgb(174, 94, 28);
   cursor: pointer;
 }
 
@@ -128,6 +125,7 @@ h2 {
   position: relative;
   padding: 15px;
   width: 80%;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
 }
 
 .modal-container button {
